@@ -2,7 +2,7 @@ spring:
   application:
     name: sudoku-test-task
   config:
-    import: "optional:file:src\\main\\resources\\.env[.properties]"
+    import: "optional:file:src\\test\\resources\\.env[.properties]"
   datasource:
     driver-class-name: org.postgresql.Driver
     url: ${DB_HOST}
