@@ -1,9 +1,8 @@
-package com.example.sudokutesttask;
+package com.example.sudokutesttask.service;
 
 import com.example.sudokutesttask.exception.InvalidLevelException;
 import com.example.sudokutesttask.exception.SudokuReadException;
 import com.example.sudokutesttask.model.Sudoku;
-import com.example.sudokutesttask.service.LocalFileSudokuProvider;
 import com.example.sudokutesttask.util.SudokuReader;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
