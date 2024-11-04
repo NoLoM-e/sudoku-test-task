@@ -49,7 +49,7 @@ public class LocalFileSudokuProviderTest {
 
     @Test
     public void given_file_provider_when_valid_level_number_is_provided_then_valid_return() {
-        Sudoku expected = new Sudoku(new byte[][]{
+        Sudoku expected = new Sudoku(new short[][]{
                 {9,8,7,6,5,4,3,2,1},
                 {9,8,7,6,5,4,3,2,1},
                 {9,8,7,6,5,4,3,2,1},
@@ -72,7 +72,7 @@ public class LocalFileSudokuProviderTest {
 
     @Test
     public void given_file_provider_when_single_file_in_directory_then_valid_return() {
-        Sudoku expected = new Sudoku(new byte[][]{
+        Sudoku expected = new Sudoku(new short[][]{
                 {9,8,7,6,5,4,3,2,1},
                 {9,8,7,6,5,4,3,2,1},
                 {9,8,7,6,5,4,3,2,1},

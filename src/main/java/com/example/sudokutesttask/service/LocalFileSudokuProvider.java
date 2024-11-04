@@ -35,8 +35,8 @@ public class LocalFileSudokuProvider implements SudokuProvider {
         var filePattern = filePrefix + "%d" + ".csv";
         var fileName = String.format(filePattern, level);
         try {
-            var bytes = sudokuReader.readFile(fileName);
-            return new Sudoku(bytes);
+            var values = sudokuReader.readFile(fileName);
+            return new Sudoku(values);
         } catch (SudokuReadException e) {
             log.error("Was not able to read level {} from file {}", level, fileName, e);
             throw new InvalidLevelException("Could not find level with number %d.".formatted(level), e);
@@ -61,8 +61,8 @@ public class LocalFileSudokuProvider implements SudokuProvider {
         var chosenFile = levelFiles.get(randomNumber);
 
         try {
-            byte[][] bytes = sudokuReader.readFile(chosenFile.getName());
-            return new Sudoku(bytes);
+            var values = sudokuReader.readFile(chosenFile.getName());
+            return new Sudoku(values);
         } catch (SudokuReadException e) {
             log.error("Was not able to read file {} chosen at random.", chosenFile.getName(), e);
             throw new SudokuReadException("Could not read random file %s.".formatted(chosenFile.getName()), e);

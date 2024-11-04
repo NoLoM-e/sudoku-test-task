@@ -36,7 +36,7 @@ public class SudokuReaderTest {
 
     @Test
     public void given_sudoku_reader_when_valid_file_then_valid_return() {
-        byte[][] expected = {
+        short[][] expected = {
                 {1,2,3,4,5,6,7,8,9},
                 {1,2,3,4,5,6,7,8,9},
                 {1,2,3,4,5,6,7,8,9},
@@ -47,7 +47,7 @@ public class SudokuReaderTest {
                 {1,2,3,4,5,6,7,8,9},
                 {1,2,3,4,5,6,7,8,9}
         };
-        byte[][] sudoku = sudokuReader.readFile("valid_sudoku_file.csv");
+        short[][] sudoku = sudokuReader.readFile("valid_sudoku_file.csv");
         assertEquals(expected.length, sudoku.length);
         for (int i = 0; i < expected.length; i++) {
             assertEquals(expected[i].length, sudoku[i].length);
