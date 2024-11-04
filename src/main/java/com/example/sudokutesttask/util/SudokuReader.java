@@ -1,13 +1,11 @@
 package com.example.sudokutesttask.util;
 
 import com.example.sudokutesttask.exception.SudokuReadException;
-import lombok.extern.slf4j.Slf4j;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import java.io.IOError;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,6 +14,7 @@ import java.util.Arrays;
 @Component
 public class SudokuReader {
 
+    @Getter
     @Value("${DATA_DIRECTORY}")
     private String dataDirectory;
 
