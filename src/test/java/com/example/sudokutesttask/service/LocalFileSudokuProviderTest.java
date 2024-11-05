@@ -3,6 +3,7 @@ package com.example.sudokutesttask.service;
 import com.example.sudokutesttask.exception.InvalidLevelException;
 import com.example.sudokutesttask.exception.SudokuReadException;
 import com.example.sudokutesttask.model.Sudoku;
+import com.example.sudokutesttask.model.enums.Difficulty;
 import com.example.sudokutesttask.util.SudokuReader;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,9 +60,10 @@ public class LocalFileSudokuProviderTest {
                 {9,8,7,6,5,4,3,2,1},
                 {9,8,7,6,5,4,3,2,1},
                 {9,8,7,6,5,4,3,2,1}
-        });
+        }, Difficulty.EASY);
         Sudoku sudoku = localFileSudokuProvider.getSudoku(1);
         assertEquals(expected.getGrid().length, sudoku.getGrid().length);
+        assertEquals(expected.getDifficulty(), sudoku.getDifficulty());
         for (int i = 0; i < sudoku.getGrid().length; i++) {
             assertEquals(expected.getGrid()[i].length, sudoku.getGrid()[i].length);
             for (int j = 0; j < sudoku.getGrid()[i].length; j++) {
@@ -82,9 +84,10 @@ public class LocalFileSudokuProviderTest {
                 {9,8,7,6,5,4,3,2,1},
                 {9,8,7,6,5,4,3,2,1},
                 {9,8,7,6,5,4,3,2,1}
-        });
+        }, Difficulty.EASY);
         Sudoku sudoku = localFileSudokuProvider.getRandomSudoku();
         assertEquals(expected.getGrid().length, sudoku.getGrid().length);
+        assertEquals(expected.getDifficulty(), sudoku.getDifficulty());
         for (int i = 0; i < sudoku.getGrid().length; i++) {
             assertEquals(expected.getGrid()[i].length, sudoku.getGrid()[i].length);
             for (int j = 0; j < sudoku.getGrid()[i].length; j++) {

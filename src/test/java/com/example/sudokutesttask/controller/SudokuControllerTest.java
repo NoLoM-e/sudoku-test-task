@@ -1,6 +1,7 @@
 package com.example.sudokutesttask.controller;
 
 import com.example.sudokutesttask.model.Sudoku;
+import com.example.sudokutesttask.model.enums.Difficulty;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -47,7 +48,7 @@ public class SudokuControllerTest {
                 {9,8,7,6,5,4,3,2,1},
                 {9,8,7,6,5,4,3,2,1},
                 {9,8,7,6,5,4,3,2,1}
-        });
+        }, Difficulty.EASY);
 
         ResponseEntity<Sudoku> response = restTemplate.getForEntity("http://localhost:" + port + "/sudoku/random", Sudoku.class);
 
@@ -55,6 +56,7 @@ public class SudokuControllerTest {
         assertNotNull(response.getBody());
 
         assertEquals(expected.getGrid().length, response.getBody().getGrid().length);
+        assertEquals(expected.getDifficulty(), response.getBody().getDifficulty());
         for (int i = 0; i < response.getBody().getGrid().length; i++) {
             assertEquals(expected.getGrid()[i].length, response.getBody().getGrid()[i].length);
             for (int j = 0; j < response.getBody().getGrid().length; j++) {
@@ -75,7 +77,7 @@ public class SudokuControllerTest {
                 {9,8,7,6,5,4,3,2,1},
                 {9,8,7,6,5,4,3,2,1},
                 {9,8,7,6,5,4,3,2,1}
-        });
+        }, Difficulty.EASY);
 
         ResponseEntity<Sudoku> response = restTemplate.getForEntity("http://localhost:" + port + "/sudoku/level/1", Sudoku.class);
 
@@ -83,6 +85,7 @@ public class SudokuControllerTest {
         assertNotNull(response.getBody());
 
         assertEquals(expected.getGrid().length, response.getBody().getGrid().length);
+        assertEquals(expected.getDifficulty(), response.getBody().getDifficulty());
         for (int i = 0; i < response.getBody().getGrid().length; i++) {
             assertEquals(expected.getGrid()[i].length, response.getBody().getGrid()[i].length);
             for (int j = 0; j < response.getBody().getGrid().length; j++) {

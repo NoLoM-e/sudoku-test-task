@@ -1,7 +1,6 @@
 package com.example.sudokutesttask.controller;
 
 import com.example.sudokutesttask.exception.IllegalSudokuOperationException;
-import com.example.sudokutesttask.exception.IllegalSudokuOperationHttpException;
 import com.example.sudokutesttask.exception.SudokuReadException;
 import com.example.sudokutesttask.model.Sudoku;
 import com.example.sudokutesttask.service.SudokuHolder;
