@@ -71,8 +71,11 @@ export class Grid{
         next: (response: boolean) => {
           if (response) {
             this.grid[row][col].isRight = true;
+            targetElement.classList.remove("is-invalid");
+            targetElement.classList.add("is-valid");
           } else {
-            console.log("The guess was not correct");
+            targetElement.classList.remove("is-valid");
+            targetElement.classList.add("is-invalid");
           }
         },
         error: (err) => {

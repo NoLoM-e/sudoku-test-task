@@ -6,7 +6,7 @@
           <td class="" *ngFor="let num of number; index as col">
             <div class="input-group">
               <input class="text-center form-control form-control-sm" *ngIf="num.value != 0" type="text" value="{{num.value}}" [disabled]="grid[row][col].isRight">
-              <input class="text-center form-control form-control-sm"  *ngIf="num.value == 0" type="text" value="" (input)="checkInput($event, row, col)" maxlength="1" [disabled]="grid[row][col].isRight">
+              <input class="text-center form-control form-control-sm" *ngIf="num.value == 0" type="text" value="" (input)="checkInput($event, row, col)" maxlength="1" [disabled]="grid[row][col].isRight">
             </div>
           </td>
         </tr>
