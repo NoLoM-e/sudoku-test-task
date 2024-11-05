@@ -1,9 +1,9 @@
 <table>
   <tbody>
-    <tr  *ngFor="let number of grid">
-      <td *ngFor="let num of number">
-        <input *ngIf="num != 0" type="text" value="{{num}}" style="width: 9px" disabled>
-        <input *ngIf="num == 0" type="text" value="" style="width: 9px">
+    <tr *ngFor="let number of grid; index as row">
+      <td *ngFor="let num of number; index as col">
+        <input *ngIf="num.value != 0" type="text" value="{{num.value}}" style="width: 9px" [disabled]="grid[row][col].isRight">
+        <input *ngIf="num.value == 0" type="text" value="" style="width: 9px" (input)="checkInput($event, row, col)" maxlength="1" [disabled]="grid[row][col].isRight">
       </td>
     </tr>
   </tbody>

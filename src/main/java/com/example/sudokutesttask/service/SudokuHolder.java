@@ -5,6 +5,7 @@ import com.example.sudokutesttask.model.Sudoku;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
+import java.util.Arrays;
 import java.util.Random;
 
 @Component
@@ -51,7 +52,7 @@ public class SudokuHolder {
     private Sudoku populateUserSudoku(Sudoku sudoku) {
         var userSudoku = new Sudoku();
         userSudoku.setDifficulty(sudoku.getDifficulty());
-        userSudoku.setGrid(sudoku.getGrid());
+        userSudoku.setGrid(Arrays.stream(sudoku.getGrid()).map(short[]::clone).toArray(short[][]::new));
         var numberOfFields = sudoku.getDifficulty().getFieldsToPopulate();
         for (int i = 0; i < Math.pow(sudoku.getGrid().length, 2) - numberOfFields; i++) {
             var row = random.nextInt(9);
@@ -64,5 +65,13 @@ public class SudokuHolder {
         }
 
         return userSudoku;
+    }
+
+    public boolean checkMove(int row, int column, short value) {
+        if (sudoku.getGrid()[row][column] == value) {
+            userSudoku.getGrid()[row][column] = value; // to keep between reloads
+            return true;
+        }
+        return false;
     }
 }

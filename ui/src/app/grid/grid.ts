@@ -15,7 +15,7 @@ export class Grid{
 
   size: number = 9;
   // cells: Cell[][];
-  grid: number[][];
+  grid: Cell[][];
 
   constructor(private http: HttpClient) {
     this.getData();
@@ -24,7 +24,11 @@ export class Grid{
       this.grid[i] = [];
     }
     this.getData().subscribe((numbers: number[][]) => {
-      this.grid = numbers;
+      for (let i = 0; i < numbers.length; i++) {
+        for (let j = 0; j < numbers[i].length; j++) {
+          this.grid[i][j] = new Cell(numbers[i][j], i, j, numbers[i][j] != 0);
+        }
+      }
     });
   }
 
@@ -52,5 +56,28 @@ export class Grid{
           return [];
         }
       }));
+  }
+
+  checkInput(event: Event, row: number, col: number) {
+    let targetElement = event.target as HTMLInputElement;
+    let inputValue = targetElement.value;
+    if (!/^[1-9]$/.test(inputValue)) {
+      console.log("Input not matched the regex");
+      targetElement.value = "";
+      return;
+    }
+    this.http.put<boolean>("http://127.0.0.1:8080/sudoku/check", {row: row, col: col, value: inputValue}, { withCredentials: true })
+      .subscribe({
+        next: (response: boolean) => {
+          if (response) {
+            this.grid[row][col].isRight = true;
+          } else {
+            console.log("The guess was not correct");
+          }
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      });
   }
 }

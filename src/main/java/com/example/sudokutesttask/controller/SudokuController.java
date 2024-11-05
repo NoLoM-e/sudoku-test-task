@@ -3,12 +3,15 @@ package com.example.sudokutesttask.controller;
 import com.example.sudokutesttask.exception.IllegalSudokuOperationException;
 import com.example.sudokutesttask.exception.SudokuReadException;
 import com.example.sudokutesttask.model.Sudoku;
+import com.example.sudokutesttask.model.SudokuCheckRequest;
 import com.example.sudokutesttask.service.SudokuHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
@@ -53,5 +56,10 @@ public class SudokuController {
         } catch (SudokuReadException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @PutMapping("/check")
+    public ResponseEntity<Boolean> checkMove(@RequestBody SudokuCheckRequest request) {
+        return ResponseEntity.ok(sudokuHolder.checkMove(request.getRow(), request.getCol(), request.getValue()));
     }
 }

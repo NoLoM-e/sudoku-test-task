@@ -1,14 +1,14 @@
 export class Cell {
-  value: number | undefined;
+  value: number;
   xCoordinate: number;
   yCoordinate: number;
 
-  isRight: boolean | undefined;
+  isRight: boolean;
 
-  constructor(value: number, x: number, y: number) {
-    this.value = undefined;
+  constructor(value: number, x: number, y: number, isRight: boolean) {
+    this.value = value;
     this.xCoordinate = x;
     this.yCoordinate = y;
-    this.isRight = undefined;
+    this.isRight = isRight;
   }
 }
