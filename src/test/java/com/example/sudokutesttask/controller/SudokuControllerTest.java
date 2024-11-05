@@ -57,12 +57,16 @@ public class SudokuControllerTest {
 
         assertEquals(expected.getGrid().length, response.getBody().getGrid().length);
         assertEquals(expected.getDifficulty(), response.getBody().getDifficulty());
+        var numberOfFieldsMatched = 0;
         for (int i = 0; i < response.getBody().getGrid().length; i++) {
             assertEquals(expected.getGrid()[i].length, response.getBody().getGrid()[i].length);
             for (int j = 0; j < response.getBody().getGrid().length; j++) {
-                assertEquals(expected.getGrid()[i][j], response.getBody().getGrid()[i][j]);
+                if (expected.getGrid()[i][j] == response.getBody().getGrid()[i][j]) {
+                    numberOfFieldsMatched++;
+                }
             }
         }
+        assertEquals(expected.getDifficulty().getFieldsToPopulate(), numberOfFieldsMatched);
     }
 
     @Test
@@ -86,12 +90,16 @@ public class SudokuControllerTest {
 
         assertEquals(expected.getGrid().length, response.getBody().getGrid().length);
         assertEquals(expected.getDifficulty(), response.getBody().getDifficulty());
+        var numberOfFieldsMatched = 0;
         for (int i = 0; i < response.getBody().getGrid().length; i++) {
             assertEquals(expected.getGrid()[i].length, response.getBody().getGrid()[i].length);
             for (int j = 0; j < response.getBody().getGrid().length; j++) {
-                assertEquals(expected.getGrid()[i][j], response.getBody().getGrid()[i][j]);
+                if (expected.getGrid()[i][j] == response.getBody().getGrid()[i][j]) {
+                    numberOfFieldsMatched++;
+                }
             }
         }
+        assertEquals(expected.getDifficulty().getFieldsToPopulate(), numberOfFieldsMatched);
     }
 
     @Test

@@ -2,7 +2,8 @@
   <tbody>
     <tr  *ngFor="let number of grid">
       <td *ngFor="let num of number">
-        <input type="text" value="{{num}}" style="width: 9px">
+        <input *ngIf="num != 0" type="text" value="{{num}}" style="width: 9px" disabled>
+        <input *ngIf="num == 0" type="text" value="" style="width: 9px">
       </td>
     </tr>
   </tbody>

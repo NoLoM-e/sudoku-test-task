@@ -47,7 +47,7 @@ public class SudokuController {
     @GetMapping("/solve")
     public ResponseEntity<Sudoku> solveSudoku() {
         try {
-            return ResponseEntity.ok(sudokuHolder.getSudoku());
+            return ResponseEntity.ok(sudokuHolder.getUserSudoku());
         } catch (IllegalSudokuOperationException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (SudokuReadException e) {

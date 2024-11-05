@@ -41,6 +41,13 @@ public class SudokuHolder {
         return sudoku;
     }
 
+    public Sudoku getUserSudoku() {
+        if (userSudoku == null) {
+            throw new IllegalSudokuOperationException("Sudoku must be initialized before it can be retrieved");
+        }
+        return userSudoku;
+    }
+
     private Sudoku populateUserSudoku(Sudoku sudoku) {
         var userSudoku = new Sudoku();
         userSudoku.setDifficulty(sudoku.getDifficulty());
@@ -49,7 +56,11 @@ public class SudokuHolder {
         for (int i = 0; i < Math.pow(sudoku.getGrid().length, 2) - numberOfFields; i++) {
             var row = random.nextInt(9);
             var column = random.nextInt(9);
-            userSudoku.getGrid()[row][column] = 0;
+            if (userSudoku.getGrid()[row][column] != 0) {
+                userSudoku.getGrid()[row][column] = 0;
+            } else {
+                i--;
+            }
         }
 
         return userSudoku;
