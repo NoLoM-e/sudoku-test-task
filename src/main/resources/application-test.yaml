@@ -10,4 +10,9 @@ spring:
     password: ${DB_PASSWORD}
 server:
   port: 8080
-
+  servlet:
+    session:
+      cookie:
+        http-only: true
+        same-site: none
+        secure: false
