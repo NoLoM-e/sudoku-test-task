@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
@@ -47,7 +50,15 @@ public class SudokuControllerTest {
                 {9,8,7,6,5,4,3,2,1}
         }, Difficulty.EASY);
 
-        ResponseEntity<Sudoku> response = restTemplate.getForEntity("http://localhost:" + port + "/sudoku/random", Sudoku.class);
+        ResponseEntity<Boolean> created = restTemplate.getForEntity("http://localhost:" + port + "/sudoku/random", Boolean.class);
+
+        assertEquals(true, created.getBody());
+
+        var sessionHeaderValue = created.getHeaders().get("Set-Cookie").get(0).split(";")[0];
+        var headers = new HttpHeaders();
+        headers.set("Cookie", sessionHeaderValue);
+        HttpEntity<Void> request = new HttpEntity<>(headers);
+        ResponseEntity<Sudoku> response = restTemplate.exchange("http://localhost:" + port + "/sudoku/solve", HttpMethod.GET, request, Sudoku.class);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
@@ -80,7 +91,15 @@ public class SudokuControllerTest {
                 {9,8,7,6,5,4,3,2,1}
         }, Difficulty.EASY);
 
-        ResponseEntity<Sudoku> response = restTemplate.getForEntity("http://localhost:" + port + "/sudoku/level/1", Sudoku.class);
+        ResponseEntity<Boolean> created = restTemplate.getForEntity("http://localhost:" + port + "/sudoku/level/1", Boolean.class);
+        assertEquals(true, created.getBody());
+
+        var sessionHeaderValue = created.getHeaders().get("Set-Cookie").get(0).split(";")[0];
+        System.out.println("SESSION COOKIE VALUE IS : " + sessionHeaderValue);
+        var headers = new HttpHeaders();
+        headers.set("Cookie", sessionHeaderValue);
+        HttpEntity<Void> request = new HttpEntity<>(headers);
+        ResponseEntity<Sudoku> response = restTemplate.exchange("http://localhost:" + port + "/sudoku/solve", HttpMethod.GET, request, Sudoku.class);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
