@@ -1,0 +1,8 @@
+<div class="container d-flex vh-100 justify-content-center align-items-center">
+<!--  <div class="row">-->
+    <div class="text-center">
+      <button *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]" class="btn btn-primary mb-3 d-block w-100" (click)="generateLevelByNumber(i)">Level {{i}}</button>
+      <button class="btn btn-primary mb-3 d-block w-100" (click)="generateRandomLevel()">Random Level</button>
+    </div>
+<!--  </div>-->
+</div>

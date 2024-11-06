@@ -5,6 +5,7 @@ import com.example.sudokutesttask.exception.SudokuReadException;
 import com.example.sudokutesttask.model.Sudoku;
 import com.example.sudokutesttask.model.SudokuCheckRequest;
 import com.example.sudokutesttask.service.SudokuHolder;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,11 +15,16 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.view.RedirectView;
 
 @RestController
 @RequestMapping("/sudoku")
-@CrossOrigin(origins = {"http://localhost:4200", "https://127.0.0.1:4200"}, maxAge = 3600, allowCredentials = "true")
+@CrossOrigin(
+        origins = {"http://localhost:4200", "http://127.0.0.1:4200"},
+        maxAge = 3600,
+        allowCredentials = "true",
+        exposedHeaders = {"X-Redirect-Location"}
+)
+@Slf4j
 public class SudokuController {
 
     private SudokuHolder sudokuHolder;
@@ -28,23 +34,27 @@ public class SudokuController {
     }
 
     @GetMapping("/level/{number}")
-    public RedirectView generateSudokuByLevel(@PathVariable int number) {
+    public ResponseEntity<Boolean> generateSudokuByLevel(@PathVariable int number){
         try {
             sudokuHolder.generateSudokuByLevel(number);
         } catch (SudokuReadException e) {
-            return new RedirectView("/error/404"); //replace with 404 page
+            return ResponseEntity.badRequest().body(false);
         }
-        return new RedirectView("/sudoku/solve");
+        return ResponseEntity.status(HttpStatus.OK)
+                .header("X-Redirect-Location", "/solve")
+                .body(true);
     }
 
     @GetMapping("/random")
-    public RedirectView generateRandomSudoku() {
+    public ResponseEntity<Boolean>  generateRandomSudoku() {
         try {
             sudokuHolder.generateRandomSudoku();
         } catch (SudokuReadException e) {
-            return new RedirectView("/error/404"); //replace with 404 page
+            return ResponseEntity.badRequest().body(false);
         }
-        return new RedirectView("/sudoku/solve");
+        return ResponseEntity.status(HttpStatus.OK)
+                .header("X-Redirect-Location", "/solve")
+                .body(true);
     }
 
     @GetMapping("/solve")

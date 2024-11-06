@@ -2,6 +2,7 @@ package com.example.sudokutesttask.service;
 
 import com.example.sudokutesttask.exception.IllegalSudokuOperationException;
 import com.example.sudokutesttask.model.Sudoku;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -10,6 +11,7 @@ import java.util.Random;
 
 @Component
 @SessionScope
+@Slf4j
 public class SudokuHolder {
 
     private SudokuProvider provider;
@@ -44,6 +46,7 @@ public class SudokuHolder {
 
     public Sudoku getUserSudoku() {
         if (userSudoku == null) {
+            log.error("Unable to return user sudoku, because it must be initialized before it can be retrieved.");
             throw new IllegalSudokuOperationException("Sudoku must be initialized before it can be retrieved");
         }
         return userSudoku;
