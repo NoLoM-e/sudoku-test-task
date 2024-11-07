@@ -11,6 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import java.nio.file.Path;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -33,7 +35,7 @@ public class LocalFileSudokuProviderTest {
     @Test
     public void given_file_provider_when_no_levels_exist_then_throw() {
         var previousDataDirValue = ReflectionTestUtils.getField(sudokuReader, "dataDirectory");
-        ReflectionTestUtils.setField(sudokuReader, "dataDirectory", "src\\test\\resources");
+        ReflectionTestUtils.setField(sudokuReader, "dataDirectory", Path.of("src", "test", "resources").toString());
         var exception = assertThrows(InvalidLevelException.class, () -> localFileSudokuProvider.getRandomSudoku());
         assertEquals("No levels were found. Please verify that path to the file storage is correct.", exception.getMessage());
         ReflectionTestUtils.setField(sudokuReader, "dataDirectory", previousDataDirValue);
