@@ -1,5 +1,6 @@
 # Sudoku Game
 
+### Description
 The project is done using Java with Spring Boot as a backed and Angular as a frontend.  
 The project has leveling system and takes sudoku grids from the files that can be found under `src/main/resources/sudoku_samples`  
 Before the startup please populate the `.env` file located in the resource folder.  
@@ -10,6 +11,7 @@ Before the startup please populate the `.env` file located in the resource folde
 
 - Backed : `./gradew bootRun`
 - Frontend : `ng serve`
+- Access `http://localhost:4200`
 
 ---
 
