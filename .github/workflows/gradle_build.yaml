@@ -12,6 +12,10 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      DATA_DIRECTORY: ${{ vars.DATA_DIRECTORY }}
+      FILE_SECTION_SPLITTER: ${{ vars.FILE_SECTION_SPLITTER }}
+      SUDOKU_FILE_PREFIX: ${{ vars.SUDOKU_FILE_PREFIX }}
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 21
