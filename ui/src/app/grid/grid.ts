@@ -46,7 +46,7 @@ export class Grid implements OnInit {
       .pipe(catchError((err: HttpErrorResponse, data) => {
         if(err.status == 400) {
           console.log("Got 400 status error, sending request to /levels");
-          this.router.navigate(['/levels']);
+          this.returnToLevels();
           return [];
         }
         else {
@@ -79,5 +79,9 @@ export class Grid implements OnInit {
           console.log(err);
         }
       });
+  }
+
+  returnToLevels() {
+    this.router.navigate(['/levels']);
   }
 }

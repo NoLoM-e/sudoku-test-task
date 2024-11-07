@@ -19,7 +19,7 @@ export class LevelPickerComponent {
           if (response) {
             setTimeout(() => {
               this.router.navigate([response.headers.get("X-Redirect-Location")])
-            }, 1000);
+            }, 100);
           }
         },
         error: (err) => {
@@ -37,7 +37,7 @@ export class LevelPickerComponent {
           if (response) {
             setTimeout(() => {
               this.router.navigate([response.headers.get("X-Redirect-Location")])
-            }, 1000);
+            }, 100);
           }
         },
         error: (err) => {
@@ -45,5 +45,9 @@ export class LevelPickerComponent {
           console.log(err);
         }
       });
+  }
+
+  returnToSolvePage() {
+    this.router.navigate(["/solve"]);
   }
 }

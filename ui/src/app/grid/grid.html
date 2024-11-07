@@ -1,16 +1,31 @@
-<div class="container vh-100 d-flex justify-content-center align-items-center">
-  <div class="table-container mx-auto w-75">
+<div class="container vh-100 flex-column d-flex justify-content-center align-items-center">
+  <div class="table-container mx-auto w-50">
     <table class="table table-bordered" style="table-layout: fixed; width: 100%;">
       <tbody>
         <tr *ngFor="let number of grid; index as row">
-          <td class="" *ngFor="let num of number; index as col">
+          <td class="" *ngFor="let num of number; index as col"
+              [ngClass]="{
+                'border-right-bold': (col + 1) % 3 === 0 && col !== 8,
+                'border-bottom-bold': (row + 1) % 3 === 0 && row !== 8
+              }"
+          >
             <div class="input-group">
-              <input class="text-center form-control form-control-sm" *ngIf="num.value != 0" type="text" value="{{num.value}}" [disabled]="grid[row][col].isRight">
-              <input class="text-center form-control form-control-sm" *ngIf="num.value == 0" type="text" value="" (input)="checkInput($event, row, col)" maxlength="1" [disabled]="grid[row][col].isRight">
+              <input class="text-center form-control form-control-sm"
+                     *ngIf="num.value != 0" type="text" value="{{num.value}}"
+                     [disabled]="grid[row][col].isRight"
+              >
+              <input class="text-center form-control form-control-sm"
+                     *ngIf="num.value == 0" type="text" value=""
+                     (input)="checkInput($event, row, col)" maxlength="1"
+                     [disabled]="grid[row][col].isRight"
+              >
             </div>
           </td>
         </tr>
       </tbody>
     </table>
+  </div>
+  <div class="text-center mt-4">
+    <button class="btn btn-primary" (click)="returnToLevels()">Return to Levels page</button>
   </div>
 </div>
