@@ -70,9 +70,17 @@ export class Grid implements OnInit {
             this.grid[row][col].isRight = true;
             targetElement.classList.remove("is-invalid");
             targetElement.classList.add("is-valid");
+            targetElement.value = inputValue; // to replace the value in case of spamming and clearing the field
+
+            setTimeout(() => {
+              targetElement.classList.remove("is-valid");
+            }, 500);
           } else {
-            targetElement.classList.remove("is-valid");
             targetElement.classList.add("is-invalid");
+
+            setTimeout(() => {
+              targetElement.classList.remove("is-invalid");
+            }, 500);
           }
         },
         error: (err) => {
