@@ -13,7 +13,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      DATA_DIRECTORY: ${{ vars.DATA_DIRECTORY }}
+      DATA_DIRECTORY: ${{ github.workspace }}/${{ vars.RELATIVE_DATA_DIRECTORY }}
       FILE_SECTION_SPLITTER: ${{ vars.FILE_SECTION_SPLITTER }}
       SUDOKU_FILE_PREFIX: ${{ vars.SUDOKU_FILE_PREFIX }}
     steps:
